@@ -1,0 +1,57 @@
+.predictor-page {
+  min-height: calc(100vh - 46px);
+
+  background: #f8fafc;
+
+  padding: 27px 20px 50px;
+}
+
+.predictor-heading {
+  text-align: center;
+
+  margin-bottom: 29px;
+}
+
+.predictor-badge {
+  width: fit-content;
+
+  margin: 0 auto 10px;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  background: #e8f0ff;
+  color: var(--primary);
+
+  font-size: 9px;
+}
+
+.predictor-heading h1 {
+  font-size: 26px;
+
+  margin-bottom: 5px;
+}
+
+.predictor-heading p {
+  color: var(--secondary-text);
+
+  font-size: 11px;
+}
+
+.prediction-error {
+  max-width: 505px;
+
+  margin: 15px auto 0;
+
+  padding: 10px;
+
+  text-align: center;
+
+  background: #fee2e2;
+  color: var(--danger);
+
+  border-radius: 7px;
+
+  font-size: 10px;
+}

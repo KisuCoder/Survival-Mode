@@ -1,0 +1,223 @@
+.result-page {
+  max-width: 550px;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+.result-badge {
+  width: fit-content;
+
+  margin: 0 auto 10px;
+
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  padding: 5px 10px;
+
+  border-radius: 20px;
+
+  background: #dcfce7;
+  color: var(--success);
+
+  font-size: 9px;
+}
+
+.result-page h1 {
+  font-size: 26px;
+  margin-bottom: 5px;
+}
+
+.result-subtitle {
+  color: var(--secondary-text);
+  font-size: 11px;
+
+  margin-bottom: 25px;
+}
+
+.result-card {
+  background: white;
+
+  border: 1px solid var(--border);
+
+  border-radius: 11px;
+
+  padding: 25px;
+
+  text-align: left;
+
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.07);
+}
+
+.result-label {
+  display: block;
+
+  color: var(--secondary-text);
+
+  font-size: 9px;
+
+  margin-bottom: 7px;
+}
+
+.result-price {
+  color: var(--success);
+
+  font-size: 30px;
+  font-weight: 700;
+
+  margin-bottom: 5px;
+}
+
+.result-range {
+  color: var(--secondary-text);
+
+  font-size: 10px;
+}
+
+.result-divider {
+  height: 1px;
+
+  background: var(--border);
+
+  margin: 20px 0;
+}
+
+.result-property {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 16px;
+}
+
+.result-property div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.result-property span {
+  color: var(--secondary-text);
+
+  font-size: 8px;
+}
+
+.result-property strong {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  font-size: 10px;
+}
+
+.confidence-box {
+  margin-top: 20px;
+
+  padding-top: 16px;
+
+  border-top: 1px solid var(--border);
+}
+
+.confidence-box > div:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 7px;
+}
+
+.confidence-box span {
+  color: var(--secondary-text);
+  font-size: 9px;
+}
+
+.confidence-box strong {
+  font-size: 10px;
+}
+
+.confidence-bar {
+  width: 100%;
+  height: 5px;
+
+  background: #e2e8f0;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+}
+
+.confidence-bar div {
+  height: 100%;
+
+  background: var(--primary);
+
+  border-radius: inherit;
+}
+
+.result-actions {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 9px;
+
+  margin-top: 17px;
+}
+
+.try-again-button,
+.browse-result-button {
+  height: 34px;
+
+  padding: 0 14px;
+
+  border-radius: 7px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.try-again-button {
+  border: 1px solid var(--border);
+
+  background: white;
+
+  color: var(--text);
+}
+
+.browse-result-button {
+  border: none;
+
+  background: var(--primary);
+
+  color: white;
+}
+
+.result-disclaimer {
+  max-width: 400px;
+
+  margin: 17px auto 0;
+
+  color: var(--secondary-text);
+
+  font-size: 8px;
+  line-height: 1.5;
+}
+
+@media (max-width: 500px) {
+  .result-actions {
+    flex-direction: column;
+  }
+
+  .result-property {
+    grid-template-columns: 1fr;
+  }
+}
