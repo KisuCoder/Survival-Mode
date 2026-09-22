@@ -15,7 +15,7 @@ function Navbar() {
             <Home size={15} />
           </span>
 
-          <span>EstateAI</span>
+          <span>DiHaus DIHtionary AI</span>
         </Link>
 
         <div className="navbar-links">
