@@ -33,11 +33,33 @@ Base URL: `http://localhost:5000/api`
 | DELETE | `/favorites/:propertyId` | Yes | `{ success: true }` |
 
 ## Prediction (ML Gateway)
-| Method | Endpoint | Request | Response |
-|--------|----------|---------|----------|
-| POST | `/predict` | `{ squareMeters, bedrooms, bathrooms, floorNumber, yearBuilt, locationZone }` | `{ predictedPrice, confidenceInterval: [low, high] }` |
 
-**Note:** The `/predict` endpoint forwards the request to the Python ML microservice at `http://localhost:8000/predict` and returns its response.
+POST /api/predict
+
+Request body (all 12 fields required):
+{
+  "area": 5000,                          // number
+  "bedrooms": 3,                         // number
+  "bathrooms": 2,                        // number
+  "stories": 2,                          // number
+  "parking": 1,                          // number
+  "mainroad": "yes",                     // "yes" or "no"
+  "guestroom": "no",                     // "yes" or "no"
+  "basement": "no",                      // "yes" or "no"
+  "hotwaterheating": "no",               // "yes" or "no"
+  "airconditioning": "yes",              // "yes" or "no"
+  "prefarea": "no",                      // "yes" or "no"
+  "furnishingstatus": "semi-furnished"   // "furnished" | "semi-furnished" | "unfurnished"
+}
+
+Response:
+{ "predicted_price": 6439755.25 }
+
+Notes:
+- Backend forwards this request to the Python ML microservice
+  at http://localhost:8000/predict and returns its response unchanged.
+- Frontend must send exactly these field names and value formats.
+- ML service must be running on port 8000 for this endpoint to work.
 
 ## Auth Header Format
 Protected routes require:
