@@ -5,11 +5,16 @@ const propertySchema = new mongoose.Schema({
   description: String,
   address: String,
   location: {
-    type: { type: String, default: 'Point' },
-    coordinates: [Number]  
+  type: {
+    type: String,
+    enum: ['Point'],
+    default: 'Point'
   },
-
-
+  coordinates: {
+    type: [Number],
+    default: [0, 0]           
+  }
+}, 
  
   area: { type: Number, required: true },       
   bedrooms: { type: Number, required: true },
