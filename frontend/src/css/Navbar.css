@@ -1,0 +1,93 @@
+.navbar {
+  height: 46px;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-container {
+  max-width: 850px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.logo-icon {
+  width: 23px;
+  height: 23px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--primary);
+  color: white;
+
+  border-radius: 6px;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+
+  margin-left: 80px;
+}
+
+.navbar-links a {
+  font-size: 11px;
+  color: #0f172a;
+  transition: 0.2s;
+}
+
+.navbar-links a:hover,
+.navbar-links a.active {
+  color: var(--primary);
+}
+
+.login-button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  border: none;
+  background: transparent;
+
+  font-size: 11px;
+  color: #0f172a;
+}
+
+.login-button:hover {
+  color: var(--primary);
+}
+
+@media (max-width: 650px) {
+  .navbar-links {
+    margin-left: 0;
+    gap: 12px;
+  }
+
+  .navbar-container {
+    padding: 0 14px;
+  }
+
+  .navbar-links a {
+    font-size: 10px;
+  }
+
+  .login-button {
+    font-size: 10px;
+  }
+}
