@@ -15,6 +15,33 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+// GET /api/properties/near?lat=14.5&lng=121.0&radius=5
+router.get('/near', async (req, res, next) => {
+  try {
+    const { lat, lng, radius } = req.query;
+
+    if (!lat || !lng) {
+      return res.status(400).json({ error: 'lat and lng required' });
+    }
+
+    const properties = await Property.find({
+      location: {
+        $near: {
+          $geometry: {
+            type: 'Point',
+            coordinates: [parseFloat(lng), parseFloat(lat)]
+          },
+          $maxDistance: (parseFloat(radius) || 5) * 1000  // km → meters
+        }
+      }
+    });
+
+    res.json(properties);
+  } catch (err) {
+    next(err);
+  }
+});
+
 // GET /api/properties/:id — public, single property
 router.get('/:id', async (req, res, next) => {
   try {
