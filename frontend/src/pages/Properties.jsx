@@ -107,6 +107,27 @@ const properties = [
 ];
 
 function Properties() {
+ 
+const [reservedIds, setReservedIds] = useState(
+  () => JSON.parse(localStorage.getItem("dihausReservedIds") || "[]")
+);
+
+function reserveProperty(property) {
+  const updated = [...new Set([...reservedIds, property.id])];
+
+  localStorage.setItem("dihausReservedIds", JSON.stringify(updated));
+  localStorage.setItem("dihausTransactionProperty", JSON.stringify(property));
+
+  setReservedIds(updated);
+}
+
+function cancelReservation(propertyId) {
+  const updated = reservedIds.filter((id) => id !== propertyId);
+
+  localStorage.setItem("dihausReservedIds", JSON.stringify(updated));
+  setReservedIds(updated);
+}
+
   const [search, setSearch] = useState("");
   const [type, setType] = useState("All");
   const [price, setPrice] = useState("Any Price");
@@ -294,11 +315,14 @@ function Properties() {
       </main>
 
       {selectedProperty && (
-        <PropertyModal
-          property={selectedProperty}
-          onClose={() => setSelectedProperty(null)}
-        />
-      )}
+  <PropertyModal
+    property={selectedProperty}
+    isReserved={reservedIds.includes(selectedProperty.id)}
+    onReserve={reserveProperty}
+    onCancelReservation={cancelReservation}
+    onClose={() => setSelectedProperty(null)}
+  />
+)}
 
     </>
   );

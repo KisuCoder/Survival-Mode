@@ -145,3 +145,32 @@
   font-size: 10px;
   font-weight: 600;
 }
+
+.modal-reserve-button {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 7px;
+  background: var(--primary);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.modal-reserve-button:hover {
+  background: #1d4ed8;
+}
+
+.modal-reserve-button.cancel {
+  background: #dc2626;
+}
+
+.modal-reserve-button.cancel:hover {
+  background: #b91c1c;
+}
