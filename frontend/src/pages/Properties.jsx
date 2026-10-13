@@ -33,7 +33,6 @@ function cancelReservation(propertyId) {
 }
 
   const [search, setSearch] = useState("");
-  const [type, setType] = useState("All");
   const [price, setPrice] = useState("Any Price");
   const [bedrooms, setBedrooms] = useState("All");
   const [furnish, setFurnish] = useState("All");
@@ -54,11 +53,8 @@ function cancelReservation(propertyId) {
       );
     }
 
-    if (type !== "All") {
-      result = result.filter(
-        (property) => property.type === type
-      );
-    }
+
+  
 
     if (price === "Under ₱5M") {
       result = result.filter(
@@ -118,7 +114,7 @@ function cancelReservation(propertyId) {
     }
 
     return result;
-  }, [search, type, price, bedrooms, furnish, sort]);
+  }, [search, price, bedrooms, furnish, sort]);
 
   const CustomIcon = new Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
@@ -159,20 +155,6 @@ function cancelReservation(propertyId) {
             </div>
 
             <div className="select-grid">
-              <div className="select-wrapper">
-                <select
-                  value={type}
-                  onChange={(e) => setType(e.target.value)}
-                >
-                  <option value="All">Property Type</option>
-                  <option value="Apartment">Apartment</option>
-                  <option value="Condominium">Condominium</option>
-                  <option value="House">House</option>
-                  <option value="Townhouse">Townhouse</option>
-                </select>
-
-                <ChevronDown size={13} />
-              </div>
 
               <div className="select-wrapper">
                 <select

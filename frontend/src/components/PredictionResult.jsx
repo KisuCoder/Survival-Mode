@@ -53,11 +53,6 @@ function PredictionResult({ prediction, onReset }) {
           </div>
 
           <div>
-            <span>Property Type</span>
-            <strong>{property.propertyType}</strong>
-          </div>
-
-          <div>
             <span>Floor Area</span>
             <strong>{property.floorArea} m²</strong>
           </div>
@@ -72,11 +67,6 @@ function PredictionResult({ prediction, onReset }) {
             <strong>{property.bathrooms}</strong>
           </div>
 
-          <div>
-            <span>Year Built</span>
-            <strong>{property.yearBuilt}</strong>
-          </div>
-          
           <div>
             <span>Near Main Road</span>
             <strong>{property.nearMainRoad ? "Yes" : "No"}</strong>

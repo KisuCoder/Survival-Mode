@@ -162,4 +162,4 @@ def predict():
 
 if __name__ == "__main__":
     # debug=True is fine for local dev; set to False before any real deployment
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(host="127.0.0.1", port=8000, debug=True)

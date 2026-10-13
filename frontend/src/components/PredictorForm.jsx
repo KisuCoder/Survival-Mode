@@ -9,7 +9,6 @@ function PredictorForm({ onSubmit, loading }) {
     location: "",
     propertyType: "",
     floorArea: "",
-    yearBuilt: "",
     bedrooms: "",
     bathrooms: "",
     nearMainRoad: "",
@@ -60,8 +59,8 @@ function PredictorForm({ onSubmit, loading }) {
             <option value="Makati City">Makati City</option>
             <option value="Taguig City">Taguig City</option>
             <option value="Pasig City">Pasig City</option>
-            <option value="Marikina City">Marikina City</option>
-            <option value="Cavite">Cavite</option>
+            <option value="Manila">Manila</option>
+            <option value="Rizal">Rizal</option>
           </select>
 
           <ChevronDown size={14} />
@@ -71,29 +70,6 @@ function PredictorForm({ onSubmit, loading }) {
       </div>
 
       <div className="form-group full">
-
-        <label>
-          Property Type<span>*</span>
-        </label>
-
-        <div className="form-select">
-
-          <select
-            name="propertyType"
-            value={formData.propertyType}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select an option</option>
-            <option value="Apartment">Apartment</option>
-            <option value="Condominium">Condominium</option>
-            <option value="House">House</option>
-            <option value="Townhouse">Townhouse</option>
-          </select>
-
-          <ChevronDown size={14} />
-
-        </div>
 
       </div>
 
@@ -113,25 +89,6 @@ function PredictorForm({ onSubmit, loading }) {
             onChange={handleChange}
             required
             min="30"
-          />
-
-        </div>
-
-        <div className="form-group">
-
-          <label>
-            Year Built<span>*</span>
-          </label>
-
-          <input
-            type="number"
-            name="yearBuilt"
-            placeholder="e.g. 2020"
-            value={formData.yearBuilt}
-            onChange={handleChange}
-            required
-            min="1990"
-            max="2026"
           />
 
         </div>
@@ -329,18 +286,18 @@ function PredictorForm({ onSubmit, loading }) {
         <div className="form-group">
 
           <label>
-            Basement<span>*</span>
+            Parking<span>*</span>
           </label>
 
           <input
-            type="boolean"
-            name="BaseMent"
-            placeholder="e.g. yes"
-            value={formData.BaseMent}
+            type="number"
+            name="parkingSpaces"
+            placeholder="e.g. 2"
+            value={formData.parkingSpaces}
             onChange={handleChange}
             required
-            min="yes"
-            max="no"
+            min="0"
+            max="10"
           />
 
         </div>
