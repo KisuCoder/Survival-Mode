@@ -1,0 +1,68 @@
+[{
+  "_id": {
+    "$oid": "6ace5377eb957c0979b6a1d1"
+  },
+  "name": "Robi",
+  "email": "robi@dihaus.local",
+  "password": "$2b$10$xkfKKD1188G4mOnRIJLczeJ2wVFr/eufQ9Zueum6hUCXf07yHdv7G",
+  "role": "user",
+  "favorites": [],
+  "createdAt": {
+    "$date": "2026-10-13T15:51:19.787Z"
+  },
+  "updatedAt": {
+    "$date": "2026-10-13T15:51:19.787Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6ace5383eb957c0979b6a1d2"
+  },
+  "name": "Wil",
+  "email": "wil@dihaus.local",
+  "password": "$2b$10$cHKMAo2DJvKfDUg6njMhB.6mw0Oavhg5ywJrM.cVFUfZxBsDzatcy",
+  "role": "user",
+  "favorites": [],
+  "createdAt": {
+    "$date": "2026-10-13T15:51:31.574Z"
+  },
+  "updatedAt": {
+    "$date": "2026-10-13T15:51:31.574Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6ace539deb957c0979b6a1d3"
+  },
+  "name": "Francis",
+  "email": "francis@dihaus.local",
+  "password": "$2b$10$DSyQQAX5LW2wOphdYm3Rp.65XJTlls4csfzeutVu84o96K84MNObi",
+  "role": "user",
+  "favorites": [],
+  "createdAt": {
+    "$date": "2026-10-13T15:51:57.055Z"
+  },
+  "updatedAt": {
+    "$date": "2026-10-13T15:51:57.055Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6ace53aceb957c0979b6a1d4"
+  },
+  "name": "Clifford",
+  "email": "clifford@dihaus.local",
+  "password": "$2b$10$H.b3vsPwsDL3YUVvEkdDvO80hnFP50biuP/JtCtsqMsInZ0ERrzui",
+  "role": "user",
+  "favorites": [],
+  "createdAt": {
+    "$date": "2026-10-13T15:52:12.908Z"
+  },
+  "updatedAt": {
+    "$date": "2026-10-13T15:52:12.908Z"
+  },
+  "__v": 0
+}]
