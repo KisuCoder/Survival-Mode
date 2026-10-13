@@ -6,7 +6,6 @@ import {
 } from "lucide-react";
 
 import { Link } from "react-router-dom";
-
 import "../css/PredictionResult.css";
 
 function PredictionResult({ prediction, onReset }) {
@@ -14,7 +13,6 @@ function PredictionResult({ prediction, onReset }) {
 
   return (
     <div className="result-page">
-
       <div className="result-badge">
         <CheckCircle size={13} />
         Prediction Complete
@@ -27,7 +25,6 @@ function PredictionResult({ prediction, onReset }) {
       </p>
 
       <div className="result-card">
-
         <span className="result-label">
           AI Estimated Market Value
         </span>
@@ -36,14 +33,9 @@ function PredictionResult({ prediction, onReset }) {
           {prediction.price}
         </div>
 
-        <div className="result-range">
-          Estimated range: {prediction.range}
-        </div>
-
         <div className="result-divider" />
 
         <div className="result-property">
-
           <div>
             <span>Location</span>
             <strong>
@@ -76,33 +68,10 @@ function PredictionResult({ prediction, onReset }) {
             <span>Year Built</span>
             <strong>{property.yearBuilt}</strong>
           </div>
-
         </div>
-
-        <div className="confidence-box">
-
-          <div>
-            <span>Model Confidence</span>
-
-            <strong>
-              {prediction.confidence}%
-            </strong>
-          </div>
-
-          <div className="confidence-bar">
-            <div
-              style={{
-                width: `${prediction.confidence}%`
-              }}
-            />
-          </div>
-
-        </div>
-
       </div>
 
       <div className="result-actions">
-
         <button
           className="try-again-button"
           onClick={onReset}
@@ -118,14 +87,13 @@ function PredictionResult({ prediction, onReset }) {
           <Home size={13} />
           Browse Properties
         </Link>
-
       </div>
 
       <p className="result-disclaimer">
         This value is an AI-generated estimate and should not
-        be considered a guaranteed market price.
+        be considered a guaranteed market price. The model currently
+        uses default values for some property features.
       </p>
-
     </div>
   );
 }
