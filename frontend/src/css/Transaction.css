@@ -1,0 +1,213 @@
+
+.transaction-page {
+  min-height: calc(100vh - 80px);
+  padding: 35px 20px 55px;
+  background: #f8fafc;
+}
+
+.transaction-container {
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.transaction-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 22px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #2563eb;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.transaction-container > h1 {
+  margin: 0 0 7px;
+  color: #0f172a;
+  font-size: 28px;
+}
+
+.transaction-subtitle {
+  margin: 0 0 25px;
+  color: #64748b;
+  font-size: 14px;
+}
+
+.transaction-card {
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 4px 15px rgba(15, 23, 42, 0.05);
+}
+
+.transaction-image {
+  display: block;
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.transaction-content {
+  padding: 25px;
+}
+
+.transaction-type {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: #e8f0ff;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.transaction-content h2 {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-size: 22px;
+}
+
+.transaction-location {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+}
+
+.transaction-price-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 22px 0;
+  padding: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  background: #f8fafc;
+}
+
+.transaction-price-box span {
+  color: #64748b;
+  font-size: 13px;
+}
+
+.transaction-price-box strong {
+  color: #16a34a;
+  font-size: 24px;
+}
+
+.transaction-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px 22px;
+  padding: 18px 0;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.transaction-details span {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: #64748b;
+  font-size: 12px;
+}
+
+.transaction-description {
+  margin: 18px 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.reservation-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 14px;
+  color: #dc2626;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #dc2626;
+}
+
+.transaction-cancel,
+.transaction-empty button,
+.transaction-not-reserved button {
+  width: 100%;
+  min-height: 42px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 7px;
+  background: #dc2626;
+  color: white;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.transaction-cancel:hover {
+  background: #b91c1c;
+}
+
+.transaction-not-reserved button,
+.transaction-empty button {
+  margin-top: 14px;
+  background: #2563eb;
+}
+
+.transaction-note {
+  margin: 14px 0 0;
+  color: #94a3b8;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.transaction-empty {
+  padding: 35px 25px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: white;
+  text-align: center;
+}
+
+.transaction-empty p {
+  color: #64748b;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .transaction-page {
+    padding: 25px 14px 40px;
+  }
+
+  .transaction-container > h1 {
+    font-size: 24px;
+  }
+
+  .transaction-image {
+    height: 210px;
+  }
+
+  .transaction-content {
+    padding: 18px;
+  }
+
+  .transaction-content h2 {
+    font-size: 19px;
+  }
+
+  .transaction-price-box strong {
+    font-size: 21px;
+  }
+}

@@ -1,0 +1,111 @@
+.property-card {
+  background: white;
+
+  border: 1px solid var(--border);
+  border-radius: 9px;
+
+  overflow: hidden;
+
+  box-shadow: 0 2px 5px rgba(15, 23, 42, 0.08);
+
+  transition: 0.2s;
+}
+
+.property-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.1);
+}
+
+.property-image-container {
+  position: relative;
+}
+
+.property-image {
+  width: 100%;
+  height: 134px;
+
+  object-fit: cover;
+}
+
+.property-type {
+  position: absolute;
+
+  top: 8px;
+  left: 8px;
+
+  background: var(--primary);
+  color: white;
+
+  padding: 4px 7px;
+
+  border-radius: 4px;
+
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.property-content {
+  padding: 12px 13px;
+}
+
+.property-price {
+  color: var(--success);
+
+  font-size: 14px;
+  font-weight: 700;
+
+  margin-bottom: 3px;
+}
+
+.property-content h3 {
+  font-size: 11px;
+  margin-bottom: 6px;
+}
+
+.property-location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  color: var(--secondary-text);
+
+  font-size: 9px;
+
+  margin-bottom: 10px;
+}
+
+.property-details {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: var(--secondary-text);
+
+  font-size: 8px;
+
+  margin-bottom: 12px;
+}
+
+.property-details span {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.view-property-button {
+  width: 100%;
+  height: 28px;
+
+  border: none;
+  border-radius: 6px;
+
+  background: var(--primary);
+  color: white;
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.view-property-button:hover {
+  background: var(--primary-dark);
+}
