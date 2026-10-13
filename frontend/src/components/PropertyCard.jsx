@@ -8,13 +8,16 @@ import {
 import "../css/PropertyCard.css";
 
 function PropertyCard({ property, onView }) {
+  const thumbnail = property.images && property.images.length > 0 
+    ? property.images[0] 
+    : property.image;
   return (
     <div className="property-card">
 
       <div className="property-image-container">
 
         <img
-          src={property.image}
+          src={thumbnail}
           alt={property.title}
           className="property-image"
         />

@@ -11,7 +11,15 @@ function PredictorForm({ onSubmit, loading }) {
     floorArea: "",
     yearBuilt: "",
     bedrooms: "",
-    bathrooms: ""
+    bathrooms: "",
+    nearMainRoad: "",
+    parkingSpaces: "",
+    furnishedStatus: "",
+    floor: "",
+    airConditioning: "",
+    guestRoom: "",
+    HotWaterHeater: "",
+    BaseMent: "",
   });
 
   const handleChange = (e) => {
@@ -98,13 +106,13 @@ function PredictorForm({ onSubmit, loading }) {
           </label>
 
           <input
-            type="number"
+            type= "number"
             name="floorArea"
-            placeholder="e.g. 65"
+            placeholder="e.g. 30"
             value={formData.floorArea}
             onChange={handleChange}
             required
-            min="1"
+            min="30"
           />
 
         </div>
@@ -122,7 +130,7 @@ function PredictorForm({ onSubmit, loading }) {
             value={formData.yearBuilt}
             onChange={handleChange}
             required
-            min="1900"
+            min="1990"
             max="2026"
           />
 
@@ -141,11 +149,11 @@ function PredictorForm({ onSubmit, loading }) {
           <input
             type="number"
             name="bedrooms"
-            placeholder="e.g. 2"
+            placeholder="e.g. 1"
             value={formData.bedrooms}
             onChange={handleChange}
             required
-            min="0"
+            min="1"
           />
 
         </div>
@@ -159,11 +167,180 @@ function PredictorForm({ onSubmit, loading }) {
           <input
             type="number"
             name="bathrooms"
-            placeholder="e.g. 2"
+            placeholder="e.g. 1"
             value={formData.bathrooms}
             onChange={handleChange}
             required
-            min="0"
+            min="1"
+          />
+
+        </div>
+
+      </div>
+
+      <div className="form-row">
+
+        <div className="form-group">
+
+          <label>
+            Near Main Road<span>*</span>
+          </label>
+
+          <input
+            type="boolean"
+            name="nearMainRoad"
+            placeholder="e.g. yes"
+            value={formData.nearMainRoad}
+            onChange={handleChange}
+            required
+          />
+
+        </div>
+
+        <div className="form-group">
+
+          <label>
+            Air Conditioning<span>*</span>
+          </label>
+
+          <input
+            type="boolean"
+            name="airConditioning"
+            placeholder="e.g. yes"
+            value={formData.airConditioning}
+            onChange={handleChange}
+            required
+          />
+
+        </div>
+
+      </div>
+
+      <div className="form-row">
+
+        <div className="form-group">
+
+          <label>
+            Floor<span>*</span>
+          </label>
+
+          <input
+            type="number"
+            name="floor"
+            placeholder="e.g. 1"
+            value={formData.floor}
+            onChange={handleChange}
+            required
+            min="1"
+            max="30"
+          />
+
+        </div>
+
+        <div className="form-group">
+
+          <label>
+            Guest Room<span>*</span>
+          </label>
+
+          <input
+            type="boolean"
+            name="guestRoom"
+            placeholder="e.g. yes"
+            value={formData.guestRoom}
+            onChange={handleChange}
+            required
+            min="yes"
+            max="no"
+          />
+
+        </div>
+
+      </div>
+
+      <div className="form-row">
+
+        <div className="form-group">
+
+          <label>
+            Hot water<span>*</span>
+          </label>
+
+          <input
+            type="boolean"
+            name="HotWaterHeater"
+            placeholder="e.g. yes"
+            value={formData.HotWaterHeater}
+            onChange={handleChange}
+            required
+          />
+
+        </div>
+
+        <div className="form-group">
+
+          <label>
+            Basement<span>*</span>
+          </label>
+
+          <input
+            type="boolean"
+            name="BaseMent"
+            placeholder="e.g. yes"
+            value={formData.BaseMent}
+            onChange={handleChange}
+            required
+            min="yes"
+            max="no"
+          />
+
+        </div>
+
+      </div>
+
+      <div className="form-row">
+
+        <div className="form-group">
+
+          <label>
+            Furnishing Condition<span>*</span>
+          </label>
+
+          <div className="form-select">
+
+            <select
+              name="furnishedStatus"
+              value={formData.furnishedStatus}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select an option</option>
+              <option value="furnished">Furnished</option>
+              <option value="semi-furnished">Semi-furnished</option>
+              <option value="unfurnished">Unfurnished</option>
+            </select>
+
+            <ChevronDown size={14} />
+
+          </div>
+
+        </div>
+
+        <div className="form-group">
+
+          <label>
+            Basement<span>*</span>
+          </label>
+
+          <input
+            type="boolean"
+            name="BaseMent"
+            placeholder="e.g. yes"
+            value={formData.BaseMent}
+            onChange={handleChange}
+            required
+            min="yes"
+            max="no"
           />
 
         </div>
