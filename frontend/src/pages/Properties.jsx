@@ -1,116 +1,21 @@
 import { Search, ChevronDown } from "lucide-react";
 import { useMemo, useState } from "react";
-
+import { MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
+import 'leaflet/dist/leaflet.css';
 import Navbar from "../components/Navbar";
 import PropertyCard from "../components/PropertyCard";
 import PropertyModal from "../components/PropertyModal";
-
+import {properties, marker} from "../config/info";
+import { Icon, DivIcon } from "leaflet";
+import MarkerClusterGroup from "react-leaflet-cluster";
 import "../css/Properties.css";
-
-const properties = [
-  {
-    id: 1,
-    type: "Apartment",
-    image:
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=700&q=80",
-    price: "₱2,900,000",
-    numericPrice: 2900000,
-    title: "Studio Apartment near BGC",
-    location: "Taguig City",
-    bedrooms: 1,
-    bathrooms: 1,
-    area: 28,
-    yearBuilt: 2020,
-    description:
-      "A modern studio apartment located near business districts, restaurants, and transportation."
-  },
-  {
-    id: 2,
-    type: "Condominium",
-    image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=700&q=80",
-    price: "₱4,100,000",
-    numericPrice: 4100000,
-    title: "High-Rise 1BR with City View",
-    location: "Makati City",
-    bedrooms: 1,
-    bathrooms: 1,
-    area: 42,
-    yearBuilt: 2021,
-    description:
-      "A high-rise condominium unit with a modern interior and city views."
-  },
-  {
-    id: 3,
-    type: "Condominium",
-    image:
-      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=700&q=80",
-    price: "₱5,800,000",
-    numericPrice: 5800000,
-    title: "Modern 2BR Condominium",
-    location: "Quezon City",
-    bedrooms: 2,
-    bathrooms: 2,
-    area: 65,
-    yearBuilt: 2022,
-    description:
-      "A spacious two-bedroom condominium designed for comfortable city living."
-  },
-  {
-    id: 4,
-    type: "House",
-    image:
-      "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=700&q=80",
-    price: "₱7,200,000",
-    numericPrice: 7200000,
-    title: "Family House with Garden",
-    location: "Marikina City",
-    bedrooms: 3,
-    bathrooms: 2,
-    area: 120,
-    yearBuilt: 2018,
-    description:
-      "A family-friendly house with a spacious living area and garden."
-  },
-  {
-    id: 5,
-    type: "Townhouse",
-    image:
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=80",
-    price: "₱6,300,000",
-    numericPrice: 6300000,
-    title: "Modern Townhouse",
-    location: "Pasig City",
-    bedrooms: 3,
-    bathrooms: 2,
-    area: 95,
-    yearBuilt: 2019,
-    description:
-      "A modern townhouse with efficient use of space and convenient access to the city."
-  },
-  {
-    id: 6,
-    type: "House",
-    image:
-      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=700&q=80",
-    price: "₱9,500,000",
-    numericPrice: 9500000,
-    title: "Spacious Modern Residence",
-    location: "Cavite",
-    bedrooms: 4,
-    bathrooms: 3,
-    area: 180,
-    yearBuilt: 2020,
-    description:
-      "A spacious modern residence suitable for larger families."
-  }
-];
 
 function Properties() {
   const [search, setSearch] = useState("");
   const [type, setType] = useState("All");
   const [price, setPrice] = useState("Any Price");
   const [bedrooms, setBedrooms] = useState("All");
+  const [furnish, setFurnish] = useState("All");
   const [sort, setSort] = useState("Newest");
 
   const [selectedProperty, setSelectedProperty] = useState(null);
@@ -161,6 +66,18 @@ function Properties() {
       );
     }
 
+    if (furnish !== "All") {
+      const selectedFurnish = furnish.toLowerCase().replace(/\s+/g, "-");
+
+      result = result.filter((property) => {
+        const propertyFurnish = (property.furnishingStatus || property.furnishedStatus || "")
+          .toLowerCase()
+          .replace(/\s+/g, "-");
+
+        return propertyFurnish === selectedFurnish;
+      });
+    }
+
     if (sort === "Price: Low to High") {
       result.sort(
         (a, b) => a.numericPrice - b.numericPrice
@@ -180,7 +97,19 @@ function Properties() {
     }
 
     return result;
-  }, [search, type, price, bedrooms, sort]);
+  }, [search, type, price, bedrooms, furnish, sort]);
+
+  const CustomIcon = new Icon({
+    iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",
+    iconSize: [38, 38]
+  })
+
+  const createClusterCustomIcon = (cluster) => {
+    return new DivIcon({
+      html: `<div class="cluster-icon">${cluster.getChildCount()}</div>`,
+      iconSize: [38, 38]
+    });
+  };
 
   return (
     <>
@@ -208,65 +137,98 @@ function Properties() {
               />
             </div>
 
-            <div className="select-wrapper">
-              <select
-                value={type}
-                onChange={(e) => setType(e.target.value)}
-              >
-                <option value="All">Property Type</option>
-                <option value="Apartment">Apartment</option>
-                <option value="Condominium">Condominium</option>
-                <option value="House">House</option>
-                <option value="Townhouse">Townhouse</option>
-              </select>
+            <div className="select-grid">
+              <div className="select-wrapper">
+                <select
+                  value={type}
+                  onChange={(e) => setType(e.target.value)}
+                >
+                  <option value="All">Property Type</option>
+                  <option value="Apartment">Apartment</option>
+                  <option value="Condominium">Condominium</option>
+                  <option value="House">House</option>
+                  <option value="Townhouse">Townhouse</option>
+                </select>
 
-              <ChevronDown size={13} />
-            </div>
+                <ChevronDown size={13} />
+              </div>
 
-            <div className="select-wrapper">
-              <select
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-              >
-                <option>Any Price</option>
-                <option>Under ₱5M</option>
-                <option>₱5M - ₱8M</option>
-                <option>Above ₱8M</option>
-              </select>
+              <div className="select-wrapper">
+                <select
+                  value={price}
+                  onChange={(e) => setPrice(e.target.value)}
+                >
+                  <option>Any Price</option>
+                  <option>Under ₱5M</option>
+                  <option>₱5M - ₱8M</option>
+                  <option>Above ₱8M</option>
+                </select>
 
-              <ChevronDown size={13} />
-            </div>
+                <ChevronDown size={13} />
+              </div>
 
-            <div className="select-wrapper">
-              <select
-                value={bedrooms}
-                onChange={(e) => setBedrooms(e.target.value)}
-              >
-                <option value="All">Bedrooms</option>
-                <option value="1">1+ Bedrooms</option>
-                <option value="2">2+ Bedrooms</option>
-                <option value="3">3+ Bedrooms</option>
-                <option value="4">4+ Bedrooms</option>
-              </select>
+              <div className="select-wrapper">
+                <select
+                  value={bedrooms}
+                  onChange={(e) => setBedrooms(e.target.value)}
+                >
+                  <option value="All">Bedrooms</option>
+                  <option value="1">1+ Bedrooms</option>
+                  <option value="2">2+ Bedrooms</option>
+                  <option value="3">3+ Bedrooms</option>
+                  <option value="4">4+ Bedrooms</option>
+                </select>
 
-              <ChevronDown size={13} />
-            </div>
+                <ChevronDown size={13} />
+              </div>
 
-            <div className="select-wrapper">
-              <select
-                value={sort}
-                onChange={(e) => setSort(e.target.value)}
-              >
-                <option>Newest</option>
-                <option>Price: Low to High</option>
-                <option>Price: High to Low</option>
-              </select>
+              <div className="select-wrapper">
+                <select
+                  value={furnish}
+                  onChange={(e) => setFurnish(e.target.value)}
+                >
+                  <option value="All">Furnishing</option>
+                  <option value="Furnished">Furnished</option>
+                  <option value="Semi-furnished">Semi-furnished</option>
+                  <option value="Unfurnished">Unfurnished</option>
+                </select>
 
-              <ChevronDown size={13} />
+                <ChevronDown size={13} />
+              </div>
+
+              <div className="select-wrapper">
+                <select
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value)}
+                >
+                  <option>Newest</option>
+                  <option>Price: Low to High</option>
+                  <option>Price: High to Low</option>
+                </select>
+
+                <ChevronDown size={13} />
+              </div>
             </div>
 
           </div>
-
+          <MapContainer center={[14.58, 121.00]} zoom={10} id="map">
+          <TileLayer
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          />
+          <MarkerClusterGroup
+            chunkedLoading
+            iconCreateFunction={createClusterCustomIcon}
+            >
+            {marker.map((marker) => (
+              <Marker position={marker.geocode} icon={CustomIcon}>
+                <Popup>
+                  <h3>{marker.Popup}</h3>
+                </Popup>
+              </Marker>
+            ))}
+          </MarkerClusterGroup>
+          </MapContainer>
           <div className="result-count">
             Showing <strong>{filteredProperties.length}</strong> properties
           </div>

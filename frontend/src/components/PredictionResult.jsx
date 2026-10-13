@@ -76,6 +76,51 @@ function PredictionResult({ prediction, onReset }) {
             <span>Year Built</span>
             <strong>{property.yearBuilt}</strong>
           </div>
+          
+          <div>
+            <span>Near Main Road</span>
+            <strong>{property.nearMainRoad ? "Yes" : "No"}</strong>
+          </div>
+
+          <div>
+            <span>Air Conditioning</span>
+            <strong>{property.airConditioning ? "Yes" : "No"}</strong>
+          </div>
+
+          <div>
+            <span>Hot Water Heater</span>
+            <strong>{property.HotWaterHeater ? "Yes" : "No"}</strong>
+          </div>
+
+          <div>
+            <span>Floor</span>
+            <strong>{property.floor}</strong>
+          </div>
+
+          <div>
+            <span>Guest Room</span>
+            <strong>{property.guestRoom ? "Yes" : "No"}</strong>
+          </div>
+          
+          <div>
+            <span>Basement</span>
+            <strong>{property.BaseMent ? "Yes" : "No"}</strong>
+          </div>
+
+          <div>
+            <span>Furnished</span>
+            <strong>{property.furnishedStatus ? "Yes" : "No"}</strong>
+          </div>
+
+          <div>
+            <span>Parking Spaces</span>
+            <strong>{property.parkingSpaces}</strong>
+          </div>
+
+          <div> 
+            <span>Furnishing Condition</span>
+            <strong>{property.furnishingStatus}</strong>
+          </div>
 
         </div>
 
