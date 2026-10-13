@@ -11,7 +11,6 @@ import "../css/PredictionResult.css";
 
 function PredictionResult({ prediction, onReset }) {
   const property = prediction.property;
-
   return (
     <div className="result-page">
 
@@ -67,39 +66,39 @@ function PredictionResult({ prediction, onReset }) {
             <strong>{property.bathrooms}</strong>
           </div>
 
-          <div>
+<div>
             <span>Near Main Road</span>
-            <strong>{property.nearMainRoad ? "Yes" : "No"}</strong>
+            <strong>{property.mainroad === "yes" || property.mainroad === true ? "Yes" : "No"}</strong>
           </div>
 
           <div>
             <span>Air Conditioning</span>
-            <strong>{property.airConditioning ? "Yes" : "No"}</strong>
+            <strong>{property.airconditioning === "yes" || property.airconditioning === true ? "Yes" : "No"}</strong>
           </div>
 
           <div>
             <span>Hot Water Heater</span>
-            <strong>{property.HotWaterHeater ? "Yes" : "No"}</strong>
-          </div>
-
-          <div>
-            <span>Floor</span>
-            <strong>{property.floor}</strong>
+            <strong>{property.hotwaterheating === "yes" || property.hotwaterheating === true ? "Yes" : "No"}</strong>
           </div>
 
           <div>
             <span>Guest Room</span>
-            <strong>{property.guestRoom ? "Yes" : "No"}</strong>
+            <strong>{property.guestroom === "yes" || property.guestroom === true ? "Yes" : "No"}</strong>
           </div>
           
           <div>
             <span>Basement</span>
-            <strong>{property.BaseMent ? "Yes" : "No"}</strong>
+            <strong>{property.basement === "yes" || property.basement === true ? "Yes" : "No"}</strong>
           </div>
 
           <div>
-            <span>Furnished</span>
-            <strong>{property.furnishedStatus ? "Yes" : "No"}</strong>
+            <span>Preferred Area</span>
+            <strong>{property.prefarea === "yes" || property.prefarea === true ? "Yes" : "No"}</strong>
+          </div>
+
+          <div> 
+            <span>Furnishing Status</span>
+            <strong>{property.furnishedStatus || property.furnishingstatus || "Unfurnished"}</strong>
           </div>
 
           <div>
@@ -110,26 +109,6 @@ function PredictionResult({ prediction, onReset }) {
           <div> 
             <span>Furnishing Condition</span>
             <strong>{property.furnishingStatus}</strong>
-          </div>
-
-        </div>
-
-        <div className="confidence-box">
-
-          <div>
-            <span>Model Confidence</span>
-
-            <strong>
-              {prediction.confidence}%
-            </strong>
-          </div>
-
-          <div className="confidence-bar">
-            <div
-              style={{
-                width: `${prediction.confidence}%`
-              }}
-            />
           </div>
 
         </div>

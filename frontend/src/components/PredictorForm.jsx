@@ -4,21 +4,21 @@ import { useState } from "react";
 import "../css/PredictorForm.css";
 
 function PredictorForm({ onSubmit, loading }) {
-
   const [formData, setFormData] = useState({
-    location: "",
-    propertyType: "",
+    location: "Marikina City",
     floorArea: "",
+    yearBuilt: "",
     bedrooms: "",
     bathrooms: "",
-    nearMainRoad: "",
+    stories: "",
     parkingSpaces: "",
-    furnishedStatus: "",
-    floor: "",
-    airConditioning: "",
-    guestRoom: "",
-    HotWaterHeater: "",
-    BaseMent: "",
+    mainroad: "yes",
+    guestroom: "no",
+    basement: "no",
+    hotwaterheating: "yes",
+    airconditioning: "yes",
+    prefarea: "yes",
+    furnishedStatus: "furnished"
   });
 
   const handleChange = (e) => {
@@ -30,24 +30,45 @@ function PredictorForm({ onSubmit, loading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     onSubmit(formData);
   };
 
+  const renderSelect = (name, label, options) => (
+    <div className="form-group">
+      <label>
+        {label}<span>*</span>
+      </label>
+      <div className="form-select">
+        <select
+          name={name}
+          value={formData[name]}
+          onChange={handleChange}
+          required
+        >
+          <option value="">Select an option</option>
+          {options.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+        <ChevronDown size={14} />
+      </div>
+    </div>
+  );
+
+  const yesNo = [
+    { value: "yes", label: "Yes" },
+    { value: "no", label: "No" }
+  ];
+
   return (
-    <form
-      className="predictor-form"
-      onSubmit={handleSubmit}
-    >
-
+    <form className="predictor-form" onSubmit={handleSubmit}>
       <div className="form-group full">
-
         <label>
           Location<span>*</span>
         </label>
-
         <div className="form-select">
-
           <select
             name="location"
             value={formData.location}
@@ -61,48 +82,50 @@ function PredictorForm({ onSubmit, loading }) {
             <option value="Pasig City">Pasig City</option>
             <option value="Manila">Manila</option>
             <option value="Rizal">Rizal</option>
+            <option value="Marikina City">Marikina City</option>
           </select>
-
           <ChevronDown size={14} />
-
         </div>
-
-      </div>
-
-      <div className="form-group full">
-
       </div>
 
       <div className="form-row">
-
         <div className="form-group">
-
           <label>
             Floor Area (m²)<span>*</span>
           </label>
-
           <input
-            type= "number"
+            type="number"
             name="floorArea"
             placeholder="e.g. 30"
             value={formData.floorArea}
             onChange={handleChange}
             required
-            min="30"
+            min="1"
           />
-
         </div>
 
+        <div className="form-group">
+          <label>
+            Year Built<span>*</span>
+          </label>
+          <input
+            type="number"
+            name="yearBuilt"
+            placeholder="e.g. 2020"
+            value={formData.yearBuilt}
+            onChange={handleChange}
+            required
+            min="1900"
+            max="2030"
+          />
+        </div>
       </div>
 
       <div className="form-row">
-
         <div className="form-group">
-
           <label>
             Bedrooms<span>*</span>
           </label>
-
           <input
             type="number"
             name="bedrooms"
@@ -112,15 +135,12 @@ function PredictorForm({ onSubmit, loading }) {
             required
             min="1"
           />
-
         </div>
 
         <div className="form-group">
-
           <label>
             Bathrooms<span>*</span>
           </label>
-
           <input
             type="number"
             name="bathrooms"
@@ -130,186 +150,67 @@ function PredictorForm({ onSubmit, loading }) {
             required
             min="1"
           />
-
         </div>
-
       </div>
 
       <div className="form-row">
-
         <div className="form-group">
-
           <label>
-            Near Main Road<span>*</span>
+            Number of Stories<span>*</span>
           </label>
-
-          <input
-            type="boolean"
-            name="nearMainRoad"
-            placeholder="e.g. yes"
-            value={formData.nearMainRoad}
-            onChange={handleChange}
-            required
-          />
-
-        </div>
-
-        <div className="form-group">
-
-          <label>
-            Air Conditioning<span>*</span>
-          </label>
-
-          <input
-            type="boolean"
-            name="airConditioning"
-            placeholder="e.g. yes"
-            value={formData.airConditioning}
-            onChange={handleChange}
-            required
-          />
-
-        </div>
-
-      </div>
-
-      <div className="form-row">
-
-        <div className="form-group">
-
-          <label>
-            Floor<span>*</span>
-          </label>
-
           <input
             type="number"
-            name="floor"
+            name="stories"
             placeholder="e.g. 1"
-            value={formData.floor}
+            value={formData.stories}
             onChange={handleChange}
             required
             min="1"
-            max="30"
+            max="10"
           />
-
         </div>
 
         <div className="form-group">
-
           <label>
-            Guest Room<span>*</span>
+            Parking Spaces<span>*</span>
           </label>
-
-          <input
-            type="boolean"
-            name="guestRoom"
-            placeholder="e.g. yes"
-            value={formData.guestRoom}
-            onChange={handleChange}
-            required
-            min="yes"
-            max="no"
-          />
-
-        </div>
-
-      </div>
-
-      <div className="form-row">
-
-        <div className="form-group">
-
-          <label>
-            Hot water<span>*</span>
-          </label>
-
-          <input
-            type="boolean"
-            name="HotWaterHeater"
-            placeholder="e.g. yes"
-            value={formData.HotWaterHeater}
-            onChange={handleChange}
-            required
-          />
-
-        </div>
-
-        <div className="form-group">
-
-          <label>
-            Basement<span>*</span>
-          </label>
-
-          <input
-            type="boolean"
-            name="BaseMent"
-            placeholder="e.g. yes"
-            value={formData.BaseMent}
-            onChange={handleChange}
-            required
-            min="yes"
-            max="no"
-          />
-
-        </div>
-
-      </div>
-
-      <div className="form-row">
-
-        <div className="form-group">
-
-          <label>
-            Furnishing Condition<span>*</span>
-          </label>
-
-          <div className="form-select">
-
-            <select
-              name="furnishedStatus"
-              value={formData.furnishedStatus}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select an option</option>
-              <option value="furnished">Furnished</option>
-              <option value="semi-furnished">Semi-furnished</option>
-              <option value="unfurnished">Unfurnished</option>
-            </select>
-
-            <ChevronDown size={14} />
-
-          </div>
-
-        </div>
-
-        <div className="form-group">
-
-          <label>
-            Parking<span>*</span>
-          </label>
-
           <input
             type="number"
             name="parkingSpaces"
-            placeholder="e.g. 2"
+            placeholder="e.g. 1"
             value={formData.parkingSpaces}
             onChange={handleChange}
             required
             min="0"
             max="10"
           />
-
         </div>
-
       </div>
 
-      <button
-        type="submit"
-        className="predict-button"
-        disabled={loading}
-      >
+      <div className="form-row">
+        {renderSelect("mainroad", "Connected to Main Road?", yesNo)}
+        {renderSelect("guestroom", "Has Guest Room?", yesNo)}
+      </div>
 
+      <div className="form-row">
+        {renderSelect("basement", "Has Basement?", yesNo)}
+        {renderSelect("hotwaterheating", "Hot Water Heating?", yesNo)}
+      </div>
+
+      <div className="form-row">
+        {renderSelect("airconditioning", "Air Conditioning?", yesNo)}
+        {renderSelect("prefarea", "Preferred Area?", yesNo)}
+      </div>
+
+      <div className="form-group full" style={{ marginBottom: "13px" }}>
+        {renderSelect("furnishedStatus", "Furnishing Status", [
+          { value: "furnished", label: "Furnished" },
+          { value: "semi-furnished", label: "Semi-furnished" },
+          { value: "unfurnished", label: "Unfurnished" }
+        ])}
+      </div>
+
+      <button type="submit" className="predict-button" disabled={loading}>
         {loading ? (
           "Analyzing Property..."
         ) : (
@@ -318,9 +219,7 @@ function PredictorForm({ onSubmit, loading }) {
             Predict Property Price
           </>
         )}
-
       </button>
-
     </form>
   );
 }
