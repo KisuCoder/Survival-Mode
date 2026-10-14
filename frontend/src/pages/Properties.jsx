@@ -214,7 +214,13 @@ function cancelReservation(propertyId) {
             </div>
 
           </div>
-          <MapContainer center={[14.58, 121.00]} zoom={10} id="map">
+          <MapContainer 
+              center={[14.58, 121.00]} 
+              zoom={10} 
+              id="map" 
+              zoomControl={false} // This removes the +/- buttons completely
+              style={{ zIndex: 1, position: "relative" }}
+            >
           <TileLayer
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
