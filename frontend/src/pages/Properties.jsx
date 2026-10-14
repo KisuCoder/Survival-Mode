@@ -1,5 +1,6 @@
 import { Search, ChevronDown } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { getListedProperties } from "../services/api";
 import { MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 import 'leaflet/dist/leaflet.css';
 import Navbar from "../components/Navbar";
@@ -40,8 +41,24 @@ function cancelReservation(propertyId) {
 
   const [selectedProperty, setSelectedProperty] = useState(null);
 
+    const [dbProperties, setDbProperties] = useState([]);
+
+  useEffect(() => {
+    let ignore = false;
+
+    getListedProperties()
+      .then((list) => {
+        if (!ignore) setDbProperties(list);
+      })
+      .catch(() => {});
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
   const filteredProperties = useMemo(() => {
-    let result = [...properties];
+        let result = [...properties, ...dbProperties];
 
     if (search.trim() !== "") {
       const keyword = search.toLowerCase();
@@ -114,7 +131,7 @@ function cancelReservation(propertyId) {
     }
 
     return result;
-  }, [search, price, bedrooms, furnish, sort]);
+  }, [search, price, bedrooms, furnish, sort, dbProperties]);
 
   const CustomIcon = new Icon({
     iconUrl: "https://cdn-icons-png.flaticon.com/128/684/684908.png",

@@ -1,13 +1,12 @@
-
 require("dotenv").config({ path: __dirname + "/.env" });
 const mongoose = require("mongoose");
 const User = require("./models/User");
 
 const members = [
-  { name: "Robi", email: "robi@dihaus.local" },
-  { name: "Wil", email: "wil@dihaus.local" },
-  { name: "Francis", email: "francis@dihaus.local" },
-  { name: "Clifford", email: "clifford@dihaus.local" },
+  { name: "Robi", email: "robi@dihaus.local", role: "user" },
+  { name: "Wil", email: "wil@dihaus.local", role: "user" },
+  { name: "Francis", email: "francis@dihaus.local", role: "admin" },
+  { name: "Clifford", email: "clifford@dihaus.local", role: "user" },
 ];
 
 async function seedMembers() {
@@ -26,7 +25,14 @@ async function seedMembers() {
       const existing = await User.findOne({ email: member.email });
 
       if (existing) {
-        console.log(`Already exists: ${member.name}`);
+        // Account already exists: make sure its role matches the list above
+        if (existing.role !== member.role) {
+          existing.role = member.role;
+          await existing.save();
+          console.log(`Updated role: ${member.name} -> ${member.role}`);
+        } else {
+          console.log(`Already exists: ${member.name} (${member.role})`);
+        }
         continue;
       }
 
@@ -35,7 +41,7 @@ async function seedMembers() {
         password: process.env.DEMO_MEMBER_PASSWORD,
       });
 
-      console.log(`Created account: ${member.name}`);
+      console.log(`Created account: ${member.name} (${member.role})`);
     }
 
     console.log("Member account setup complete.");
