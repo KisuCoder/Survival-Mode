@@ -38,18 +38,12 @@ function PropertyModal({ property, onClose }) {
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
 
-  const handleProceedToTransaction = () => {
-    localStorage.setItem("dihausTransactionProperty", JSON.stringify(property));
-    
-    const reservedIds = JSON.parse(localStorage.getItem("dihausReservedIds") || "[]");
-    if (!reservedIds.includes(property.id)) {
-      const updated = [...reservedIds, property.id];
-      localStorage.setItem("dihausReservedIds", JSON.stringify(updated));
-    }
+const handleProceedToTransaction = () => {
+  localStorage.setItem("dihausTransactionProperty", JSON.stringify(property));
 
-    onClose();
-    navigate("/transaction");
-  };
+  onClose();
+  navigate("/transaction");
+};
 
   return (
     <div

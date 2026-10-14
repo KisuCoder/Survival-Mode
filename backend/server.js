@@ -13,6 +13,7 @@ app.use('/api/properties', require('./routes/properties'));
 app.use('/api/favorites', require('./routes/favorites'));
 app.use('/api/predict', require('./routes/predict'));
 
+app.use('/api/transactions', require('./routes/transactions'));
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
