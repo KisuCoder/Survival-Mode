@@ -8,11 +8,13 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.use('/api/admin', require('./routes/admin'));
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/properties', require('./routes/properties'));
 app.use('/api/favorites', require('./routes/favorites'));
 app.use('/api/predict', require('./routes/predict'));
 
+app.use('/api/transactions', require('./routes/transactions'));
 // Health check
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });

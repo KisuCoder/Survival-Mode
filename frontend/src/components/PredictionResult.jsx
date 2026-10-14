@@ -6,13 +6,14 @@ import {
 } from "lucide-react";
 
 import { Link } from "react-router-dom";
+
 import "../css/PredictionResult.css";
 
 function PredictionResult({ prediction, onReset }) {
   const property = prediction.property;
-
   return (
     <div className="result-page">
+
       <div className="result-badge">
         <CheckCircle size={13} />
         Prediction Complete
@@ -25,6 +26,7 @@ function PredictionResult({ prediction, onReset }) {
       </p>
 
       <div className="result-card">
+
         <span className="result-label">
           AI Estimated Market Value
         </span>
@@ -33,20 +35,20 @@ function PredictionResult({ prediction, onReset }) {
           {prediction.price}
         </div>
 
+        <div className="result-range">
+          Estimated range: {prediction.range}
+        </div>
+
         <div className="result-divider" />
 
         <div className="result-property">
+
           <div>
             <span>Location</span>
             <strong>
               <MapPin size={12} />
               {property.location}
             </strong>
-          </div>
-
-          <div>
-            <span>Property Type</span>
-            <strong>{property.propertyType}</strong>
           </div>
 
           <div>
@@ -64,14 +66,57 @@ function PredictionResult({ prediction, onReset }) {
             <strong>{property.bathrooms}</strong>
           </div>
 
-          <div>
-            <span>Year Built</span>
-            <strong>{property.yearBuilt}</strong>
+<div>
+            <span>Near Main Road</span>
+            <strong>{property.mainroad === "yes" || property.mainroad === true ? "Yes" : "No"}</strong>
           </div>
+
+          <div>
+            <span>Air Conditioning</span>
+            <strong>{property.airconditioning === "yes" || property.airconditioning === true ? "Yes" : "No"}</strong>
+          </div>
+
+          <div>
+            <span>Hot Water Heater</span>
+            <strong>{property.hotwaterheating === "yes" || property.hotwaterheating === true ? "Yes" : "No"}</strong>
+          </div>
+
+          <div>
+            <span>Guest Room</span>
+            <strong>{property.guestroom === "yes" || property.guestroom === true ? "Yes" : "No"}</strong>
+          </div>
+          
+          <div>
+            <span>Basement</span>
+            <strong>{property.basement === "yes" || property.basement === true ? "Yes" : "No"}</strong>
+          </div>
+
+          <div>
+            <span>Preferred Area</span>
+            <strong>{property.prefarea === "yes" || property.prefarea === true ? "Yes" : "No"}</strong>
+          </div>
+
+          <div> 
+            <span>Furnishing Status</span>
+            <strong>{property.furnishedStatus || property.furnishingstatus || "Unfurnished"}</strong>
+          </div>
+
+          <div>
+            <span>Parking Spaces</span>
+            <strong>{property.parkingSpaces}</strong>
+          </div>
+
+          <div> 
+            <span>Furnishing Condition</span>
+            <strong>{property.furnishingStatus}</strong>
+          </div>
+
         </div>
+
       </div>
 
       <div className="result-actions">
+
         <button
           className="try-again-button"
           onClick={onReset}
@@ -87,13 +132,14 @@ function PredictionResult({ prediction, onReset }) {
           <Home size={13} />
           Browse Properties
         </Link>
+
       </div>
 
       <p className="result-disclaimer">
         This value is an AI-generated estimate and should not
-        be considered a guaranteed market price. The model currently
-        uses default values for some property features.
+        be considered a guaranteed market price.
       </p>
+
     </div>
   );
 }
