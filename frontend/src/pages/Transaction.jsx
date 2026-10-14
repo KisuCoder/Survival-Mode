@@ -53,8 +53,12 @@ function Transaction() {
           ) : (
             <div className="transaction-card">
               <img
-                src={property.image}
-                alt={property.title}
+                src={
+                    property.images && property.images.length > 0
+                    ? property.images[0]
+                    : property.image
+                    }
+                  alt={property.title}
                 className="transaction-image"
               />
 

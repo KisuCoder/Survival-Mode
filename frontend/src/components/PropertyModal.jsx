@@ -11,11 +11,12 @@ import {
   ChevronUp
 } from "lucide-react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../css/PropertyModal.css";
 
 function PropertyModal({ property, onClose }) {
+  const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
@@ -36,17 +37,29 @@ function PropertyModal({ property, onClose }) {
     e.stopPropagation();
     setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
   };
+
+  const handleProceedToTransaction = () => {
+    localStorage.setItem("dihausTransactionProperty", JSON.stringify(property));
+    
+    const reservedIds = JSON.parse(localStorage.getItem("dihausReservedIds") || "[]");
+    if (!reservedIds.includes(property.id)) {
+      const updated = [...reservedIds, property.id];
+      localStorage.setItem("dihausReservedIds", JSON.stringify(updated));
+    }
+
+    onClose();
+    navigate("/transaction");
+  };
+
   return (
     <div
       className="modal-overlay"
       onClick={onClose}
     >
-
       <div
         className="property-modal"
         onClick={(e) => e.stopPropagation()}
       >
-
         <button
           className="modal-close"
           onClick={onClose}
@@ -57,12 +70,12 @@ function PropertyModal({ property, onClose }) {
           <div className="image-counter">
             {currentImageIndex + 1} / {images.length}
           </div>
-        <img
-          src={images[currentImageIndex]}
-          alt={property.title}
-          className="modal-image"
-        />
-        {images.length > 1 && (
+          <img
+            src={images[currentImageIndex]}
+            alt={property.title}
+            className="modal-image"
+          />
+          {images.length > 1 && (
             <>
               <button className="slider-btn prev-btn" onClick={handlePrev}>
                 <ChevronLeft size={20} />
@@ -71,11 +84,10 @@ function PropertyModal({ property, onClose }) {
                 <ChevronRight size={20} />
               </button>
             </>
-        )}
+          )}
         </div>
 
         <div className="modal-content">
-
           <span className="modal-type">
             {property.type}
           </span>
@@ -91,7 +103,6 @@ function PropertyModal({ property, onClose }) {
           </p>
 
           <div className="modal-details">
-
             <span>
               <BedDouble size={14} />
               {property.bedrooms} Bedrooms
@@ -111,7 +122,6 @@ function PropertyModal({ property, onClose }) {
               <Calendar size={14} />
               {property.yearBuilt}
             </span>
-
           </div>
 
           <div className="description-dropdown">
@@ -134,14 +144,21 @@ function PropertyModal({ property, onClose }) {
             to="/predictor"
             className="modal-predict-button"
             onClick={onClose}
+            style={{ marginBottom: "10px" }}
           >
             Use This Property for Prediction
           </Link>
 
+          <button
+            type="button"
+            className="modal-predict-button"
+            onClick={handleProceedToTransaction}
+            style={{ background: "#16a34a" }}
+          >
+            Proceed to Transaction
+          </button>
         </div>
-
       </div>
-
     </div>
   );
 }
