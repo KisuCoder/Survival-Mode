@@ -10,18 +10,19 @@ import {
   ChevronDown,
   ChevronUp
 } from "lucide-react";
-
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import "../css/PropertyModal.css";
 
 function PropertyModal({ property, onClose }) {
+  const navigate = useNavigate();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isDescriptionOpen, setIsDescriptionOpen] = useState(false);
 
-  const images = property.images && property.images.length > 0
-    ? property.images
-    : [property.image];
+  const images =
+    property.images && property.images.length > 0
+      ? property.images
+      : [property.image];
 
   const descriptionText = Array.isArray(property.description)
     ? property.description.join("\n")
@@ -34,84 +35,83 @@ function PropertyModal({ property, onClose }) {
 
   const handlePrev = (e) => {
     e.stopPropagation();
-    setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length);
+    setCurrentImageIndex(
+      (prev) => (prev - 1 + images.length) % images.length
+    );
   };
-  return (
-    <div
-      className="modal-overlay"
-      onClick={onClose}
-    >
 
+  const handleReserve = () => {
+    localStorage.setItem(
+      "dihausTransactionProperty",
+      JSON.stringify(property)
+    );
+
+    const reservedIds = JSON.parse(
+      localStorage.getItem("dihausReservedIds") || "[]"
+    );
+
+    if (!reservedIds.includes(property.id)) {
+      reservedIds.push(property.id);
+      localStorage.setItem(
+        "dihausReservedIds",
+        JSON.stringify(reservedIds)
+      );
+    }
+
+    onClose();
+    navigate("/transaction");
+  };
+
+  return (
+    <div className="modal-overlay" onClick={onClose}>
       <div
         className="property-modal"
         onClick={(e) => e.stopPropagation()}
       >
-
-        <button
-          className="modal-close"
-          onClick={onClose}
-        >
+        <button className="modal-close" onClick={onClose}>
           <X size={17} />
         </button>
+
         <div className="modal-image-container">
           <div className="image-counter">
             {currentImageIndex + 1} / {images.length}
           </div>
-        <img
-          src={images[currentImageIndex]}
-          alt={property.title}
-          className="modal-image"
-        />
-        {images.length > 1 && (
+
+          <img
+            src={images[currentImageIndex]}
+            alt={property.title}
+            className="modal-image"
+          />
+
+          {images.length > 1 && (
             <>
-              <button className="slider-btn prev-btn" onClick={handlePrev}>
+              <button
+                className="slider-btn prev-btn"
+                onClick={handlePrev}
+              >
                 <ChevronLeft size={20} />
               </button>
-              <button className="slider-btn next-btn" onClick={handleNext}>
+              <button
+                className="slider-btn next-btn"
+                onClick={handleNext}
+              >
                 <ChevronRight size={20} />
               </button>
             </>
-        )}
+          )}
         </div>
 
         <div className="modal-content">
-
-          <span className="modal-type">
-            {property.type}
-          </span>
-
-          <div className="modal-price">
-            {property.price}
-          </div>
-
+          <span className="modal-type">{property.type}</span>
+          <div className="modal-price">{property.price}</div>
           <h2>{property.title}</h2>
-
-          <p className="modal-location">
-            {property.location}
-          </p>
+          <p className="modal-location">{property.location}</p>
 
           <div className="modal-details">
-
-            <span>
-              <BedDouble size={14} />
-              {property.bedrooms} Bedrooms
-            </span>
-
-            <span>
-              <Bath size={14} />
-              {property.bathrooms} Bathrooms
-            </span>
-
-            <span>
-              <Maximize size={14} />
-              {property.area} m²
-            </span>
-
-            <span>
-              <Calendar size={14} />
-              {property.yearBuilt}
-            </span>
-
+            <span><BedDouble size={14} /> {property.bedrooms} Bedrooms</span>
+            <span><Bath size={14} /> {property.bathrooms} Bathrooms</span>
+            <span><Maximize size={14} /> {property.area} m²</span>
+            <span><Calendar size={14} /> {property.yearBuilt}</span>
           </div>
 
           <div className="description-dropdown">
@@ -122,10 +122,16 @@ function PropertyModal({ property, onClose }) {
               aria-expanded={isDescriptionOpen}
             >
               <span>Description</span>
-              {isDescriptionOpen ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+              {isDescriptionOpen
+                ? <ChevronUp size={14} />
+                : <ChevronDown size={14} />}
             </button>
 
-            <div className={`description-panel ${isDescriptionOpen ? "open" : ""}`}>
+            <div
+              className={`description-panel ${
+                isDescriptionOpen ? "open" : ""
+              }`}
+            >
               <p className="modal-description">{descriptionText}</p>
             </div>
           </div>
@@ -138,10 +144,15 @@ function PropertyModal({ property, onClose }) {
             Use This Property for Prediction
           </Link>
 
+          <button
+            type="button"
+            className="modal-predict-button"
+            onClick={handleReserve}
+          >
+            Reserve This Property
+          </button>
         </div>
-
       </div>
-
     </div>
   );
 }

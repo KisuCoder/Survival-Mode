@@ -239,12 +239,13 @@ function cancelReservation(propertyId) {
           <div className="property-grid">
 
             {filteredProperties.map((property) => (
-              <PropertyCard
-                key={property.id}
-                property={property}
-                onView={setSelectedProperty}
-              />
-            ))}
+  <PropertyCard
+    key={property.id}
+    property={property}
+    isReserved={reservedIds.includes(property.id)}
+    onView={setSelectedProperty}
+  />
+))}
 
           </div>
 
