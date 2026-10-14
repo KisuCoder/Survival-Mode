@@ -85,6 +85,22 @@ const cancelReservation = async () => {
   }
 };
 
+// Helper function to extract numeric value and calculate 10% downpayment
+const calculateDownpayment = (priceString) => {
+  if (!priceString) return { total: "₱0", downpayment: "₱0" };
+
+  // Remove currency symbols, commas, and spaces
+  const numericPrice = parseFloat(priceString.replace(/[^0-9.]/g, ""));
+  
+  if (isNaN(numericPrice)) return { total: priceString, downpayment: "₱0" };
+
+  const downpaymentAmount = numericPrice * 0.10;
+
+  return {
+    total: `₱${numericPrice.toLocaleString("en-PH")}`,
+    downpayment: `₱${Math.round(downpaymentAmount).toLocaleString("en-PH")}`
+  };
+};
 
   return (
     <>
@@ -130,6 +146,21 @@ const cancelReservation = async () => {
                   <strong>{property.price}</strong>
                 </div>
 
+                {(() => {
+                const { downpayment } = calculateDownpayment(property?.price);
+                return (
+                  <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: "8px", padding: "12px 16px", margin: "12px 0" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "13px", color: "#475569", marginBottom: "4px" }}>
+                      <span>Required Downpayment (10%):</span>
+                      <strong style={{ color: "#2563eb", fontSize: "16px" }}>{downpayment}</strong>
+                    </div>
+                    <p style={{ fontSize: "11px", color: "#64748b", margin: 0 }}>
+                      A 10% downpayment is required to secure your reservation for this property.
+                    </p>
+                  </div>
+                );
+              })()}
+ 
                 <div className="transaction-details">
                   <span><BedDouble size={17} /> {property.bedrooms} Bedrooms</span>
                   <span><Bath size={17} /> {property.bathrooms} Bathrooms</span>
