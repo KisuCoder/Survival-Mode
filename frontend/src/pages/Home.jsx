@@ -50,7 +50,7 @@ function Home() {
             </div>
             <div className="statistics">
               <div className="stat">
-                <strong>10</strong>
+                <strong>10+</strong>
                 <span>Listed Properties</span>
               </div>
               <div className="stat">
